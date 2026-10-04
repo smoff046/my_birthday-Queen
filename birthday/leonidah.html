@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Leonidah ✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Sacramento&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: '#0d0010',
+            romancePink: '#f472b6',
+            romancePurple: '#a855f7',
+            romanceGold: '#fbbf24',
+          },
+          fontFamily: {
+            sacramento: ['Sacramento', 'cursive'],
+            playfair: ['"Playfair Display"', 'serif'],
+            cormorant: ['"Cormorant Garamond"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #0d0010; color: #fdf2f8; overflow-x: hidden; cursor: crosshair; }
+    .aurora-bg {
+      background: radial-gradient(circle at 50% 20%, rgba(244,114,182,0.18), transparent 60%),
+                  radial-gradient(circle at 80% 40%, rgba(168,85,247,0.16), transparent 50%),
+                  radial-gradient(circle at 20% 70%, rgba(251,191,36,0.12), transparent 50%), #0d0010;
+    }
+    .shimmer-text {
+      background: linear-gradient(90deg,#f472b6 0%,#fbbf24 25%,#a855f7 50%,#f472b6 75%,#fbbf24 100%);
+      background-size: 200% auto; color: transparent;
+      -webkit-background-clip: text; background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 200% center; } }
+    @keyframes floatPetal { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-16px) rotate(8deg);} }
+    .floating-petal { animation: floatPetal 4s ease-in-out infinite; }
+    .text-glow-pink { text-shadow: 0 0 20px rgba(244,114,182,0.7); }
+    @keyframes spinRecord { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+    .spinning { animation: spinRecord 6s linear infinite; }
+    .paused { animation-play-state: paused; }
+    @keyframes eqBar { 0%,100%{height:6px;} 50%{height:28px;} }
+    .eq-bar-1{animation:eqBar 0.9s ease-in-out infinite 0.1s;}
+    .eq-bar-2{animation:eqBar 0.7s ease-in-out infinite 0.3s;}
+    .eq-bar-3{animation:eqBar 1.1s ease-in-out infinite 0.2s;}
+    .eq-bar-4{animation:eqBar 0.8s ease-in-out infinite 0.4s;}
+    @keyframes flicker {
+      0%,100%{transform:scale(1) translate(-50%,0);opacity:.95;}
+      25%{transform:scale(1.15,.9) translate(-52%,-2px);opacity:1;filter:drop-shadow(0 0 10px #fbbf24);}
+      50%{transform:scale(.9,1.2) translate(-48%,-4px);opacity:.85;filter:drop-shadow(0 0 14px #f472b6);}
+      75%{transform:scale(1.05,1.05) translate(-51%,-1px);opacity:1;filter:drop-shadow(0 0 8px #fbbf24);}
+    }
+    .candle-flame { animation: flicker 1.2s infinite ease-in-out; transform-origin: bottom center; }
+    .reveal-elem { opacity:0; transform:translateY(30px); transition:all 0.9s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-elem.visible { opacity:1; transform:translateY(0); }
+    .heart-trail-particle { position:fixed; pointer-events:none; font-size:14px; user-select:none; z-index:9999; animation:floatFade 1s forwards ease-out; }
+    @keyframes floatFade {
+      0%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+      100%{opacity:0;transform:translate(-50%,-90px) scale(1.6);}
+    }
+  </style>
+</head>
+<body class="aurora-bg relative selection:bg-pink-500 selection:text-white">
+
+  <canvas id="starsCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+  <div id="confettiContainer" class="fixed inset-0 pointer-events-none z-50 overflow-hidden"></div>
+
+  <!-- NAV -->
+  <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-40 bg-purple-950/40 backdrop-blur-md border border-pink-500/20 px-6 py-2.5 rounded-full shadow-2xl flex items-center gap-6 text-sm tracking-wide">
+    <a href="#hero" class="text-pink-300 hover:text-pink-100 transition-colors flex items-center gap-1 font-cormorant font-semibold text-base">💖 Leonidah</a>
+    <span class="text-pink-500/40">✦</span>
+    <a href="#gallery" class="text-pink-200/80 hover:text-pink-300 transition-colors hidden sm:inline">Memories</a>
+    <a href="#reasons" class="text-pink-200/80 hover:text-pink-300 transition-colors hidden sm:inline">Why I Love You</a>
+    <a href="#cake" class="text-pink-200/80 hover:text-pink-300 transition-colors">Make a Wish</a>
+    <a href="#letter" class="text-pink-200/80 hover:text-pink-300 transition-colors">Love Letter</a>
+    <a href="#music" class="text-pink-200/80 hover:text-pink-300 transition-colors">🎵 Song</a>
+  </nav>
+
+  <!-- HERO -->
+  <header id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 pb-16 z-10 overflow-hidden">
+    <div class="absolute top-1/4 left-10 text-3xl floating-petal opacity-80" style="animation-delay:0s">🌸</div>
+    <div class="absolute top-1/3 right-12 text-4xl floating-petal opacity-80" style="animation-delay:1.2s">✨</div>
+    <div class="absolute bottom-28 left-16 text-3xl floating-petal opacity-80" style="animation-delay:2s">💖</div>
+    <div class="absolute bottom-20 right-20 text-3xl floating-petal opacity-80" style="animation-delay:0.7s">🌺</div>
+    <div class="absolute top-20 right-1/4 text-2xl floating-petal opacity-70" style="animation-delay:2.5s">💫</div>
+
+    <div class="relative group my-4">
+      <div class="absolute -inset-2 bg-gradient-to-r from-pink-500 via-amber-300 to-purple-600 rounded-full blur-xl opacity-70 group-hover:opacity-100 transition duration-1000 animate-pulse"></div>
+      <div class="relative w-44 h-44 sm:w-56 sm:h-56 rounded-full p-1.5 bg-gradient-to-br from-pink-400 via-amber-300 to-purple-500 shadow-2xl">
+        <!-- HERO PHOTO -->
+        <img src="images/img1.jpg" alt="Leonidah" class="w-full h-full object-cover object-top rounded-full border-2 border-pink-200/50 shadow-inner">
+      </div>
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400/90 text-night text-xs font-bold px-3 py-1 rounded-full shadow-lg border border-amber-200 flex items-center gap-1 font-playfair tracking-wider uppercase">
+        👑 Birthday Queen
+      </div>
+    </div>
+
+    <p class="font-sacramento text-5xl sm:text-7xl lg:text-8xl text-pink-300 text-glow-pink -mb-2 mt-4 tracking-wide">Happy Birthday</p>
+    <h1 class="font-playfair text-6xl sm:text-8xl lg:text-9xl font-extrabold tracking-tight shimmer-text drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]">Leonidah</h1>
+    <p class="font-cormorant text-xl sm:text-2xl text-purple-200/90 max-w-2xl mt-4 font-light italic leading-relaxed">
+      &ldquo;To the world you may be one person, but to me you are the whole world. Today and every day, you deserve all the magic, love, and wonder in the universe.&rdquo;
+    </p>
+    <div class="mt-8 flex flex-col items-center gap-2 text-pink-300/70 hover:text-pink-300 transition-colors">
+      <span class="text-xs uppercase tracking-widest font-playfair font-semibold">Celebrate Together</span>
+      <a href="#gallery" class="w-9 h-9 rounded-full border border-pink-400/30 flex items-center justify-center animate-bounce bg-pink-500/10">↓</a>
+    </div>
+  </header>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="relative py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10 reveal-elem">
+    <div class="text-center mb-16">
+      <span class="text-pink-400 font-sacramento text-4xl block mb-1">Our Journey</span>
+      <h2 class="font-playfair text-4xl sm:text-5xl font-bold tracking-tight text-white">Memories</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-4 rounded-full"></div>
+      <p class="text-pink-200/70 font-cormorant text-lg mt-3">Click any photo to view it full screen.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- PHOTO 1 -->
+      <div class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-pink-500/20 bg-purple-950/30 shadow-lg hover:shadow-[0_0_30px_rgba(244,114,182,0.45)] transition-all duration-500"
+           onclick="openLightbox('images/img1.jpg','My sunshine 🌟')">
+        <img src="images/img1.jpg" alt="Memory 1" class="w-full h-full object-cover object-top transform group-hover:scale-110 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+          <span class="text-amber-300 text-xs font-semibold uppercase tracking-wider mb-1">Our Moment</span>
+          <p class="text-white font-playfair text-base font-medium">My sunshine 🌟</p>
+        </div>
+      </div>
+
+      <!-- PHOTO 2 -->
+      <div class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-pink-500/20 bg-purple-950/30 shadow-lg hover:shadow-[0_0_30px_rgba(244,114,182,0.45)] transition-all duration-500"
+           onclick="openLightbox('images/img2.jpg','Always dreaming 💭')">
+        <img src="images/img2.jpg" alt="Memory 2" class="w-full h-full object-cover object-top transform group-hover:scale-110 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+          <span class="text-amber-300 text-xs font-semibold uppercase tracking-wider mb-1">Pure Radiance</span>
+          <p class="text-white font-playfair text-base font-medium">Always dreaming 💭</p>
+        </div>
+      </div>
+
+      <!-- PHOTO 3 -->
+      <div class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-pink-500/20 bg-purple-950/30 shadow-lg hover:shadow-[0_0_30px_rgba(244,114,182,0.45)] transition-all duration-500"
+           onclick="openLightbox('images/img3.jpg','That look 😍')">
+        <img src="images/img3.jpg" alt="Memory 3" class="w-full h-full object-cover object-top transform group-hover:scale-110 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+          <span class="text-amber-300 text-xs font-semibold uppercase tracking-wider mb-1">Together</span>
+          <p class="text-white font-playfair text-base font-medium">That look 😍</p>
+        </div>
+      </div>
+
+      <!-- PHOTO 4 -->
+      <div class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-pink-500/20 bg-purple-950/30 shadow-lg hover:shadow-[0_0_30px_rgba(244,114,182,0.45)] transition-all duration-500"
+           onclick="openLightbox('images/img4.jpg','Us 💕')">
+        <img src="images/img4.jpg" alt="Memory 4" class="w-full h-full object-cover object-top transform group-hover:scale-110 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+          <span class="text-amber-300 text-xs font-semibold uppercase tracking-wider mb-1">Us</span>
+          <p class="text-white font-playfair text-base font-medium">Us 💕</p>
+        </div>
+      </div>
+
+      <!-- PHOTO 5 -->
+      <div class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-pink-500/20 bg-purple-950/30 shadow-lg hover:shadow-[0_0_30px_rgba(244,114,182,0.45)] transition-all duration-500"
+           onclick="openLightbox('images/img5.jpg','Together 🌿')">
+        <img src="images/img5.jpg" alt="Memory 5" class="w-full h-full object-cover object-top transform group-hover:scale-110 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+          <span class="text-amber-300 text-xs font-semibold uppercase tracking-wider mb-1">Walking Together</span>
+          <p class="text-white font-playfair text-base font-medium">Together 🌿</p>
+        </div>
+      </div>
+
+      <!-- PHOTO 6 -->
+      <div class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-pink-500/20 bg-purple-950/30 shadow-lg hover:shadow-[0_0_30px_rgba(244,114,182,0.45)] transition-all duration-500"
+           onclick="openLightbox('images/img6.jpg','Pure joy 😄')">
+        <img src="images/img6.jpg" alt="Memory 6" class="w-full h-full object-cover object-top transform group-hover:scale-110 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+          <span class="text-amber-300 text-xs font-semibold uppercase tracking-wider mb-1">Joy</span>
+          <p class="text-white font-playfair text-base font-medium">Pure joy 😄</p>
+        </div>
+      </div>
+
+      <!-- PHOTO 7 -->
+      <div class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-pink-500/20 bg-purple-950/30 shadow-lg hover:shadow-[0_0_30px_rgba(244,114,182,0.45)] transition-all duration-500"
+           onclick="openLightbox('images/img7.jpg','Our story 💞')">
+        <img src="images/img7.jpg" alt="Memory 7" class="w-full h-full object-cover object-top transform group-hover:scale-110 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+          <span class="text-amber-300 text-xs font-semibold uppercase tracking-wider mb-1">Our Story</span>
+          <p class="text-white font-playfair text-base font-medium">Our story 💞</p>
+        </div>
+      </div>
+
+      <!-- PHOTO 8 -->
+      <div class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-pink-500/20 bg-purple-950/30 shadow-lg hover:shadow-[0_0_30px_rgba(244,114,182,0.45)] transition-all duration-500"
+           onclick="openLightbox('images/img8.jpg','Forever yours 💋')">
+        <img src="images/img8.jpg" alt="Memory 8" class="w-full h-full object-cover object-top transform group-hover:scale-110 transition-transform duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+          <span class="text-amber-300 text-xs font-semibold uppercase tracking-wider mb-1">Forever</span>
+          <p class="text-white font-playfair text-base font-medium">Forever yours 💋</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightboxModal" class="fixed inset-0 bg-black/95 z-50 hidden flex-col items-center justify-center p-4 backdrop-blur-xl">
+    <button onclick="closeLightbox()" class="absolute top-6 right-8 text-pink-300 hover:text-white text-3xl font-light focus:outline-none transition-colors">✕</button>
+    <div class="max-w-4xl max-h-[80vh] flex flex-col items-center">
+      <img id="lightboxImg" src="" alt="" class="max-h-[70vh] w-auto max-w-full rounded-2xl border border-pink-500/40 shadow-2xl object-contain">
+      <p id="lightboxCaption" class="mt-4 text-center font-playfair text-pink-100 text-lg sm:text-xl italic max-w-2xl px-4"></p>
+    </div>
+  </div>
+
+  <!-- WHY I LOVE YOU -->
+  <section id="reasons" class="relative py-28 px-4 sm:px-8 max-w-6xl mx-auto z-10 reveal-elem">
+    <div class="text-center mb-16">
+      <span class="text-pink-400 font-sacramento text-4xl block mb-1">Endless Reasons</span>
+      <h2 class="font-playfair text-4xl sm:text-5xl font-bold tracking-tight text-white">9 Reasons Why I Love You</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-4 rounded-full"></div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">👀</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">Those Beautiful Eyes</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">Your eyes speak a thousand words without saying a thing. I could get lost in them forever.</p>
+      </div>
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">😊</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">That Smile</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">That smile of yours fixes every bad day without even trying. It's my favourite thing.</p>
+      </div>
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">🎶</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">Your Voice</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">The way your voice makes everything feel lighter and softer. It's pure music.</p>
+      </div>
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">🤝</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">You Make Me Feel Safe</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">Whenever the world feels loud, you are the calmest, safest place I know.</p>
+      </div>
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">💪</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">Your Strength</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">Stronger than you ever give yourself credit for. Watching you inspires me every day.</p>
+      </div>
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">🧠</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">Your Brilliant Mind</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">That brilliant mind that never stops amazing me. You are smarter than you know.</p>
+      </div>
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">🫶</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">How Much You Care</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">The way you care so deeply for everyone around you. Your heart is pure gold.</p>
+      </div>
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">😂</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">You Make Me Laugh</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">You make me laugh until my cheeks hurt every single time. Life is never boring with you.</p>
+      </div>
+      <div class="bg-gradient-to-b from-purple-950/40 to-pink-950/20 backdrop-blur-sm border border-pink-500/20 p-8 rounded-3xl hover:-translate-y-2 hover:border-pink-400/60 hover:shadow-[0_10px_30px_rgba(244,114,182,0.35)] transition-all duration-300 flex flex-col items-center text-center">
+        <span class="text-5xl mb-4">⚡</span>
+        <h3 class="font-playfair text-xl font-bold text-pink-100 mb-2">One Text Changes Everything</h3>
+        <p class="font-cormorant text-lg text-pink-200/80 leading-relaxed italic">One text from you changes my whole mood in a heartbeat. You are dangerously powerful.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline" class="relative py-28 px-4 sm:px-8 max-w-4xl mx-auto z-10 reveal-elem">
+    <div class="text-center mb-20">
+      <span class="text-pink-400 font-sacramento text-4xl block mb-1">How We Began</span>
+      <h2 class="font-playfair text-4xl sm:text-5xl font-bold tracking-tight text-white">Our Story Timeline</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-4 rounded-full"></div>
+    </div>
+    <div class="relative">
+      <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 top-4 bottom-4 w-1 bg-gradient-to-b from-pink-500 via-purple-500 to-amber-400 shadow-[0_0_15px_rgba(244,114,182,0.6)] rounded-full"></div>
+      <div class="relative flex flex-col sm:flex-row items-center mb-16 sm:mb-20">
+        <div class="w-full sm:w-1/2 sm:pr-10 pl-12 sm:pl-0 sm:text-right">
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 mb-2">Chapter I</span>
+          <h3 class="font-playfair text-2xl font-bold text-white mb-1">The Day Everything Changed</h3>
+          <p class="font-cormorant text-lg text-pink-200/80 italic">"You walked into my life and nothing has been the same since. The best kind of different."</p>
+        </div>
+        <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-pink-400 border-4 border-night shadow-[0_0_15px_#f472b6] z-20"></div>
+        <div class="hidden sm:block sm:w-1/2"></div>
+      </div>
+      <div class="relative flex flex-col sm:flex-row items-center mb-16 sm:mb-20">
+        <div class="hidden sm:block sm:w-1/2"></div>
+        <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-purple-400 border-4 border-night shadow-[0_0_15px_#a855f7] z-20"></div>
+        <div class="w-full sm:w-1/2 sm:pl-10 pl-12 sm:text-left">
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 mb-2">Chapter II</span>
+          <h3 class="font-playfair text-2xl font-bold text-white mb-1">Valentine's Day Website</h3>
+          <p class="font-cormorant text-lg text-pink-200/80 italic">"I built you something special because words alone were never enough for what I feel."</p>
+        </div>
+      </div>
+      <div class="relative flex flex-col sm:flex-row items-center mb-16 sm:mb-20">
+        <div class="w-full sm:w-1/2 sm:pr-10 pl-12 sm:pl-0 sm:text-right">
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 mb-2">Chapter III</span>
+          <h3 class="font-playfair text-2xl font-bold text-white mb-1">Falling More Every Day</h3>
+          <p class="font-cormorant text-lg text-pink-200/80 italic">"Every single day you somehow make me fall for you a little more. I didn't know that was possible."</p>
+        </div>
+        <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-amber-400 border-4 border-night shadow-[0_0_15px_#fbbf24] z-20"></div>
+        <div class="hidden sm:block sm:w-1/2"></div>
+      </div>
+      <div class="relative flex flex-col sm:flex-row items-center mb-16 sm:mb-20">
+        <div class="hidden sm:block sm:w-1/2"></div>
+        <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-pink-400 border-4 border-night shadow-[0_0_15px_#f472b6] z-20"></div>
+        <div class="w-full sm:w-1/2 sm:pl-10 pl-12 sm:text-left">
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 mb-2">Chapter IV • Today 🎉</span>
+          <h3 class="font-playfair text-2xl font-bold text-white mb-1">Your Birthday — Our Milestone</h3>
+          <p class="font-cormorant text-lg text-pink-200/80 italic">"A whole new chapter begins. And I want to be in every page of it with you."</p>
+        </div>
+      </div>
+      <div class="relative flex flex-col sm:flex-row items-center">
+        <div class="w-full sm:w-1/2 sm:pr-10 pl-12 sm:pl-0 sm:text-right">
+          <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-gradient-to-r from-pink-500/30 to-amber-500/30 text-amber-200 border border-amber-400/40 mb-2">Chapter V • Forever 🌟</span>
+          <h3 class="font-playfair text-2xl font-bold text-white mb-1">All The Adventures Ahead</h3>
+          <p class="font-cormorant text-lg text-pink-200/80 italic">"So many memories we haven't made yet. I can't wait for every single one of them."</p>
+        </div>
+        <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-gradient-to-br from-pink-400 to-amber-300 border-4 border-night shadow-[0_0_20px_#fbbf24] z-20 animate-pulse"></div>
+        <div class="hidden sm:block sm:w-1/2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAKE -->
+  <section id="cake" class="relative py-28 px-4 sm:px-8 max-w-4xl mx-auto z-10 text-center reveal-elem">
+    <div class="mb-12">
+      <span class="text-pink-400 font-sacramento text-4xl block mb-1">A Magical Tradition</span>
+      <h2 class="font-playfair text-4xl sm:text-5xl font-bold tracking-tight text-white">Make a Wish, Leonidah 🎂</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-4 rounded-full"></div>
+      <p class="text-pink-200/70 font-cormorant text-lg mt-3">Close your eyes, think of your deepest wish, and blow out the candles!</p>
+    </div>
+    <div class="relative w-80 h-72 mx-auto flex items-center justify-center">
+      <svg viewBox="0 0 320 280" class="w-full h-full drop-shadow-[0_10px_30px_rgba(244,114,182,0.3)]">
+        <ellipse cx="160" cy="250" rx="140" ry="20" fill="#3b0764" stroke="#f472b6" stroke-width="2"/>
+        <ellipse cx="160" cy="245" rx="130" ry="16" fill="#1e102a"/>
+        <path d="M 50,190 A 110,25 0 0,0 270,190 L 270,240 A 110,25 0 0,1 50,240 Z" fill="#701a75"/>
+        <ellipse cx="160" cy="190" rx="110" ry="24" fill="#a21caf"/>
+        <path d="M 50,190 Q 70,210 90,195 Q 110,212 130,195 Q 150,214 170,195 Q 190,213 210,195 Q 230,215 250,195 Q 260,205 270,190" fill="none" stroke="#f472b6" stroke-width="6" stroke-linecap="round"/>
+        <path d="M 85,130 A 75,18 0 0,0 235,130 L 235,175 A 75,18 0 0,1 85,175 Z" fill="#86198f"/>
+        <ellipse cx="160" cy="130" rx="75" ry="18" fill="#c026d3"/>
+        <path d="M 85,130 Q 105,145 120,132 Q 140,147 160,132 Q 180,146 200,132 Q 220,145 235,130" fill="none" stroke="#fbbf24" stroke-width="5" stroke-linecap="round"/>
+        <rect x="115" y="80" width="10" height="42" rx="3" fill="#f472b6"/>
+        <rect x="155" y="70" width="10" height="52" rx="3" fill="#fbbf24"/>
+        <rect x="195" y="80" width="10" height="42" rx="3" fill="#f472b6"/>
+        <g id="cakeFlames">
+          <g class="candle-flame" style="transform-box:fill-box;transform-origin:120px 72px">
+            <path d="M 120,54 Q 128,64 120,72 Q 112,64 120,54 Z" fill="#fbbf24" filter="drop-shadow(0 0 6px #f59e0b)"/>
+            <path d="M 120,60 Q 124,66 120,72 Q 116,66 120,60 Z" fill="#ef4444"/>
+          </g>
+          <g class="candle-flame" style="transform-box:fill-box;transform-origin:160px 62px;animation-delay:0.3s">
+            <path d="M 160,42 Q 169,54 160,62 Q 151,54 160,42 Z" fill="#fbbf24" filter="drop-shadow(0 0 8px #fbbf24)"/>
+            <path d="M 160,49 Q 165,56 160,62 Q 155,56 160,49 Z" fill="#ef4444"/>
+          </g>
+          <g class="candle-flame" style="transform-box:fill-box;transform-origin:200px 72px;animation-delay:0.6s">
+            <path d="M 200,54 Q 208,64 200,72 Q 192,64 200,54 Z" fill="#fbbf24" filter="drop-shadow(0 0 6px #f59e0b)"/>
+            <path d="M 200,60 Q 204,66 200,72 Q 196,66 200,60 Z" fill="#ef4444"/>
+          </g>
+        </g>
+        <text x="160" y="168" text-anchor="middle" font-size="14" fill="white" font-family="Sacramento,cursive" opacity="0.9">Happy Birthday</text>
+      </svg>
+    </div>
+    <div class="mt-8 flex flex-col items-center">
+      <button id="blowCandlesBtn" onclick="blowOutCandles()" class="px-8 py-4 rounded-full font-playfair font-bold text-lg text-white bg-gradient-to-r from-pink-500 via-purple-600 to-amber-500 shadow-[0_0_25px_rgba(244,114,182,0.5)] hover:shadow-[0_0_40px_rgba(251,191,36,0.8)] transition-all duration-300 transform hover:scale-105 flex items-center gap-3">
+        <span>💨</span><span id="blowBtnText">Blow out the candles</span><span>🎂</span>
+      </button>
+      <p id="wishCelebrationMessage" class="hidden font-sacramento text-4xl sm:text-5xl text-amber-300 text-glow-pink mt-6">
+        May every wish in your heart come true! ✨💖
+      </p>
+    </div>
+  </section>
+
+  <!-- LOVE LETTER -->
+  <section id="letter" class="relative py-28 px-4 sm:px-8 max-w-4xl mx-auto z-10 text-center reveal-elem">
+    <div class="mb-12">
+      <span class="text-pink-400 font-sacramento text-4xl block mb-1">From My Whole Heart</span>
+      <h2 class="font-playfair text-4xl sm:text-5xl font-bold tracking-tight text-white">A Letter For You</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-4 rounded-full"></div>
+    </div>
+    <div class="relative inline-block cursor-pointer group" onclick="openLoveLetterModal()">
+      <div class="w-64 h-48 bg-gradient-to-br from-pink-900/60 to-purple-900/60 border-2 border-pink-400/50 rounded-2xl p-4 shadow-[0_0_30px_rgba(244,114,182,0.35)] group-hover:shadow-[0_0_50px_rgba(244,114,182,0.7)] group-hover:-translate-y-3 transition-all duration-500 flex flex-col items-center justify-center backdrop-blur-md">
+        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-red-600 to-pink-700 border-2 border-amber-300 shadow-xl flex items-center justify-center text-amber-200 text-2xl font-bold font-sacramento">L</div>
+        <p class="font-cormorant text-lg text-pink-200/90 italic mt-3 font-semibold">For My Beloved Leonidah</p>
+        <span class="text-xs text-amber-300 tracking-widest uppercase mt-1">Tap to Open ✨</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LETTER MODAL -->
+  <div id="loveLetterModal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4 backdrop-blur-xl">
+    <div class="relative bg-gradient-to-b from-[#1c0823] to-[#0d0010] border border-pink-500/40 rounded-3xl max-w-2xl w-full p-8 sm:p-12 shadow-[0_0_50px_rgba(244,114,182,0.4)] text-left flex flex-col max-h-[85vh] overflow-y-auto">
+      <button onclick="closeLoveLetterModal()" class="absolute top-5 right-6 text-pink-300 hover:text-white text-3xl font-light">✕</button>
+      <div class="flex items-center gap-3 border-b border-pink-500/20 pb-4 mb-6">
+        <span class="text-3xl">💌</span>
+        <div>
+          <h3 class="font-sacramento text-4xl text-pink-300">My Dearest Leonidah,</h3>
+          <span class="text-xs text-amber-400/80 font-mono tracking-widest uppercase">Written with all my heart</span>
+        </div>
+      </div>
+      <div id="typewriterText" class="font-cormorant text-xl sm:text-2xl text-pink-100/90 leading-relaxed min-h-[160px] whitespace-pre-line italic"></div>
+      <div class="mt-8 pt-4 border-t border-pink-500/20 flex justify-between items-center">
+        <span class="font-sacramento text-3xl text-pink-400">Forever and always, yours.</span>
+        <button onclick="closeLoveLetterModal()" class="px-5 py-2 rounded-full border border-pink-400/30 text-pink-200 hover:bg-pink-500/20 text-sm font-playfair transition-colors">Keep Close 💖</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUSIC -->
+  <section id="music" class="relative py-28 px-4 sm:px-8 max-w-4xl mx-auto z-10 reveal-elem">
+    <div class="text-center mb-16">
+      <span class="text-pink-400 font-sacramento text-4xl block mb-1">Our Soundtrack</span>
+      <h2 class="font-playfair text-4xl sm:text-5xl font-bold tracking-tight text-white">Forever Young — Kala Yone</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-4 rounded-full"></div>
+    </div>
+    <div class="bg-gradient-to-r from-purple-950/60 via-night to-pink-950/60 backdrop-blur-xl border border-pink-500/30 rounded-3xl p-8 sm:p-12 shadow-[0_0_40px_rgba(168,85,247,0.3)] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+      <div id="musicNotesContainer" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+      <div class="relative flex-shrink-0">
+        <div id="vinylRecord" class="w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-gradient-to-tr from-neutral-900 via-neutral-950 to-neutral-900 border-4 border-neutral-800 shadow-2xl flex items-center justify-center spinning paused relative">
+          <div class="absolute inset-3 rounded-full border border-neutral-700/40"></div>
+          <div class="absolute inset-6 rounded-full border border-neutral-700/30"></div>
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-pink-500 to-purple-700 border-2 border-amber-300 flex flex-col items-center justify-center p-2 text-center shadow-lg">
+            <span class="text-xs font-bold text-amber-200 font-playfair leading-tight">FOREVER YOUNG</span>
+            <span class="text-[9px] text-pink-100">Leonidah</span>
+            <div class="w-3 h-3 rounded-full bg-night border border-amber-300 mt-1"></div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/30 mb-2">NOW PLAYING</span>
+        <h3 class="font-playfair text-3xl font-bold text-white mb-1">Forever Young</h3>
+        <p class="font-cormorant text-xl text-pink-300/90 mb-4">Kala Yone</p>
+        <div id="equalizer" class="flex items-end gap-1.5 h-8 mb-6 opacity-40">
+          <div class="w-1.5 bg-pink-400 rounded-full eq-bar-1"></div>
+          <div class="w-1.5 bg-amber-400 rounded-full eq-bar-2"></div>
+          <div class="w-1.5 bg-purple-400 rounded-full eq-bar-3"></div>
+          <div class="w-1.5 bg-pink-300 rounded-full eq-bar-4"></div>
+          <div class="w-1.5 bg-amber-300 rounded-full eq-bar-1"></div>
+          <div class="w-1.5 bg-purple-300 rounded-full eq-bar-2"></div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button id="playPauseBtn" onclick="toggleMusic()" class="w-16 h-16 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-400 hover:to-purple-500 text-white flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(244,114,182,0.6)] transform hover:scale-105 active:scale-95 transition-all">
+            <span id="playIcon">▶</span>
+          </button>
+          <div class="text-sm font-cormorant text-pink-200/80">
+            <p id="musicStatusText" class="font-medium text-pink-300">Tap play for our song 🎵</p>
+            <p class="text-xs text-purple-300/70">Place song.mp3 in same folder</p>
+          </div>
+        </div>
+        <!-- LOCAL MP3 - place your song.mp3 in same folder as this HTML -->
+        <audio id="audioPlayer" loop preload="auto">
+          <source src="song.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="relative py-24 px-4 text-center z-10 border-t border-pink-500/20 bg-gradient-to-t from-purple-950/40 via-night to-transparent">
+    <div class="max-w-2xl mx-auto">
+      <p class="font-sacramento text-6xl sm:text-7xl lg:text-8xl text-pink-400 text-glow-pink mb-4">I love you, Leonidah 💖</p>
+      <p class="font-cormorant text-xl text-purple-200/80 italic mb-6">Happy Birthday to the girl of my dreams. Here's to endless more sunrises, laughs, and adventures with you.</p>
+      <div class="flex items-center justify-center gap-3 text-pink-400 text-sm">
+        <span>✨</span><span class="tracking-widest uppercase font-playfair text-xs text-pink-300/80">Forever & Always</span><span>✨</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // STARFIELD
+    const starsCanvas = document.getElementById('starsCanvas');
+    const ctx = starsCanvas.getContext('2d');
+    let stars = [];
+    function resizeCanvas() {
+      starsCanvas.width = window.innerWidth;
+      starsCanvas.height = window.innerHeight;
+      stars = [];
+      const n = Math.floor((starsCanvas.width * starsCanvas.height) / 8000);
+      for (let i = 0; i < n; i++) {
+        stars.push({ x:Math.random()*starsCanvas.width, y:Math.random()*starsCanvas.height, r:Math.random()*1.5+0.3, alpha:Math.random(), speed:Math.random()*0.02+0.005, color:['#f472b6','#a855f7','#fbbf24','#ffffff'][Math.floor(Math.random()*4)] });
+      }
+    }
+    function animateStars() {
+      ctx.clearRect(0,0,starsCanvas.width,starsCanvas.height);
+      stars.forEach(s => {
+        s.alpha += s.speed;
+        if(s.alpha>1||s.alpha<0.1) s.speed=-s.speed;
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle=s.color; ctx.globalAlpha=Math.abs(s.alpha);
+        ctx.shadowBlur=6; ctx.shadowColor=s.color; ctx.fill();
+      });
+      requestAnimationFrame(animateStars);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas(); animateStars();
+
+    // SCROLL REVEAL
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal-elem').forEach(el => observer.observe(el));
+
+    // HEART TRAIL
+    const trailEmojis = ['💖','✨','🌸','💕','💫'];
+    let lastTrail = 0;
+    window.addEventListener('mousemove', e => {
+      const now = Date.now();
+      if(now - lastTrail > 60) {
+        lastTrail = now;
+        const p = document.createElement('div');
+        p.className = 'heart-trail-particle';
+        p.textContent = trailEmojis[Math.floor(Math.random()*trailEmojis.length)];
+        p.style.left = e.clientX+'px'; p.style.top = e.clientY+'px';
+        document.body.appendChild(p);
+        setTimeout(()=>p.remove(), 1000);
+      }
+    });
+
+    // CONFETTI
+    const confettiEmojis = ['💖','🎂','✨','🎉','🌸','💐','👑','💛','🥂','🥳'];
+    const confettiContainer = document.getElementById('confettiContainer');
+    function burstConfetti(count=55) {
+      for(let i=0;i<count;i++) {
+        const item = document.createElement('div');
+        item.textContent = confettiEmojis[Math.floor(Math.random()*confettiEmojis.length)];
+        item.style.cssText = `position:absolute;left:${Math.random()*100}vw;top:-50px;font-size:${Math.random()*24+18}px;transition:transform ${Math.random()*3+2.5}s cubic-bezier(0.25,1,0.5,1),opacity 3s ease;z-index:9999`;
+        confettiContainer.appendChild(item);
+        setTimeout(()=>{ item.style.transform=`translate(${(Math.random()-0.5)*300}px,${window.innerHeight+100}px) rotate(${(Math.random()-0.5)*720}deg)`; item.style.opacity='0'; },50);
+        setTimeout(()=>item.remove(),4000);
+      }
+    }
+    window.addEventListener('load', ()=>burstConfetti(60));
+
+    // CANDLES
+    let candlesBlown = false;
+    function blowOutCandles() {
+      const flames = document.getElementById('cakeFlames');
+      if(!candlesBlown) {
+        flames.style.transition='opacity 0.6s ease'; flames.style.opacity='0';
+        document.getElementById('blowBtnText').textContent='Relight candles?';
+        document.getElementById('wishCelebrationMessage').classList.remove('hidden');
+        burstConfetti(90); candlesBlown=true;
+      } else {
+        flames.style.opacity='1';
+        document.getElementById('blowBtnText').textContent='Blow out the candles';
+        document.getElementById('wishCelebrationMessage').classList.add('hidden');
+        candlesBlown=false;
+      }
+    }
+
+    // LIGHTBOX
+    function openLightbox(src, caption) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightboxCaption').textContent = caption;
+      const m = document.getElementById('lightboxModal');
+      m.classList.remove('hidden'); m.classList.add('flex');
+    }
+    function closeLightbox() {
+      const m = document.getElementById('lightboxModal');
+      m.classList.add('hidden'); m.classList.remove('flex');
+    }
+    document.getElementById('lightboxModal').addEventListener('click', e => { if(e.target===document.getElementById('lightboxModal')) closeLightbox(); });
+
+    // LETTER TYPEWRITER
+    const letterContent = `My love,
+Today isn't just another day on the calendar.
+
+It's the day the world was given someone who would one day become incredibly special to me.
+
+I honestly don't know if words can ever completely explain what you mean to me, but I want to try anyway.
+
+There are people we meet and simply remember.
+
+Then there are people who quietly become part of our hearts.
+
+You are that person for me.
+
+I love the little things about you. The way you smile. The way you laugh. The way a simple conversation with you can somehow become the best part of my day.
+
+I love the moments that probably seem ordinary to you but somehow stay with me.
+
+And more than anything, I love the person you are.
+
+Your heart.
+Your strength.
+Your softness.
+Your beautiful imperfections.
+The way you care.
+The way you make moments feel different simply because you're there.
+
+If I could give you one thing today, it wouldn't be something wrapped in a box.
+
+I'd give you the ability to see yourself through my eyes for just one moment.
+
+Because then you'd understand why your smile is so precious to me.
+
+You'd understand why hearing from you can change my mood.
+
+You'd understand why some memories with you replay in my mind long after the moment is gone.
+
+And you'd understand just how deeply grateful I am that our paths crossed.
+
+On your birthday, I hope life is gentle with you.
+
+I hope you laugh until your stomach hurts.
+
+I hope you accomplish the things you've been quietly wishing for.
+
+I hope you discover new reasons to smile.
+
+I hope you never forget how beautiful you are — not just on the outside, but in all the little ways that make you, you.
+
+And whenever life gets difficult, I hope you remember that there is someone out here who believes you deserve every beautiful thing life has to offer.
+
+Thank you for being you.
+
+Thank you for the memories we've already made.
+
+And thank you for every beautiful moment still waiting for us.
+
+Happy birthday, my beautiful Leonidah.
+
+May this new chapter of your life be softer, brighter, happier and even more beautiful than the last.
+
+And if I get to be part of some of those beautiful moments...
+
+I'll consider myself lucky.
+
+Happy Birthday, my Queen. ❤️`;
+
+    let twIndex = 0, twTimer = null;
+    function openLoveLetterModal() {
+      const m = document.getElementById('loveLetterModal');
+      m.classList.remove('hidden'); m.classList.add('flex');
+      const el = document.getElementById('typewriterText');
+      el.textContent=''; twIndex=0; clearInterval(twTimer);
+      twTimer = setInterval(()=>{ if(twIndex<letterContent.length){ el.textContent+=letterContent.charAt(twIndex); twIndex++; } else clearInterval(twTimer); },30);
+    }
+    function closeLoveLetterModal() {
+      document.getElementById('loveLetterModal').classList.add('hidden');
+      document.getElementById('loveLetterModal').classList.remove('flex');
+      clearInterval(twTimer);
+    }
+
+    // MUSIC PLAYER
+    let isPlaying = false;
+    const vinyl = document.getElementById('vinylRecord');
+    const playIcon = document.getElementById('playIcon');
+    const equalizer = document.getElementById('equalizer');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const musicStatusText = document.getElementById('musicStatusText');
+    const musicNotesContainer = document.getElementById('musicNotesContainer');
+    let notesInterval = null;
+
+    function spawnMusicNote() {
+      const notes=['🎵','🎶','🎼','💖','✨'];
+      const n=document.createElement('div');
+      n.textContent=notes[Math.floor(Math.random()*notes.length)];
+      n.style.cssText=`position:absolute;left:${Math.random()*80+10}%;bottom:10px;font-size:22px;pointer-events:none;opacity:1;transition:all 2.5s ease-out`;
+      musicNotesContainer.appendChild(n);
+      setTimeout(()=>{ n.style.transform=`translate(${(Math.random()-0.5)*60}px,-140px) scale(1.4)`; n.style.opacity='0'; },50);
+      setTimeout(()=>n.remove(),2600);
+    }
+
+    function toggleMusic() {
+      // Prevent double tap
+      const btn = document.getElementById('playPauseBtn');
+      if(btn._busy) return;
+      btn._busy = true;
+      setTimeout(()=>btn._busy=false, 700);
+
+      isPlaying = !isPlaying;
+      if(isPlaying) {
+        vinyl.classList.remove('paused');
+        playIcon.textContent='❚❚';
+        equalizer.style.opacity='1';
+        musicStatusText.textContent='Playing: Forever Young — Kala Yone 🎵';
+        audioPlayer.play().catch(e=>{ musicStatusText.textContent='Tap again to play ▶'; console.log(e); });
+        notesInterval = setInterval(spawnMusicNote, 600);
+      } else {
+        vinyl.classList.add('paused');
+        playIcon.textContent='▶';
+        equalizer.style.opacity='0.4';
+        musicStatusText.textContent='Paused. Tap to continue 🎵';
+        audioPlayer.pause();
+        clearInterval(notesInterval);
+      }
+    }
+  </script>
+</body>
+</html>
